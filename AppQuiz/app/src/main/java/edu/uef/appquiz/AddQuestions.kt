@@ -13,7 +13,7 @@ class AddQuestions : AppCompatActivity() {
     private lateinit var questionSetName: String
     private lateinit var dbHelper: DatabaseHelper
     private var currentQuestionIndex = 1
-    private val totalQuestions = 5  // Change this to the desired number of questions
+    private val totalQuestions = 5
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,8 +85,19 @@ class AddQuestions : AppCompatActivity() {
         answerD: String,
         correctAnswerIndex: String
     ): Boolean {
-        // Add your validation logic here
-        // You can check if fields are not empty, etc.
+        if (questionText.isEmpty() || answerA.isEmpty() || answerB.isEmpty() ||
+            answerC.isEmpty() || answerD.isEmpty() || correctAnswerIndex.isEmpty()) {
+            Toast.makeText(this, "All fields must be filled", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        // Check if correctAnswerIndex is a valid integer between 1 and 4
+        val correctAnswerInt = correctAnswerIndex.toIntOrNull()
+        if (correctAnswerInt == null || correctAnswerInt < 1 || correctAnswerInt > 4) {
+            Toast.makeText(this, "Correct Answer Index must be a number between 1 and 4", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
         return true
     }
 }

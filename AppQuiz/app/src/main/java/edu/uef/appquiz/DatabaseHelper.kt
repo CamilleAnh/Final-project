@@ -345,7 +345,38 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return questions
     }
 
+    fun updateUser(user: User) {
+        val db = this.writableDatabase
+        val values = ContentValues()
 
+        values.put(COLUMN_USERNAME, user.username)
+        values.put(COLUMN_EMAIL, user.email)
+        values.put(COLUMN_ROLE, user.role)
+        values.put(COLUMN_PASSWORD, user.Password)
+
+        db.update(
+            TABLE_NAME_USERS,
+            values,
+            "$COLUMN_EMAIL = ?",
+            arrayOf(user.email)
+        )
+
+        db.close()
+    }
+
+    fun getUserNameByEmail(email: String): String? {
+        val db = readableDatabase
+        val query = "SELECT $COLUMN_USERNAME FROM $TABLE_NAME_USERS WHERE $COLUMN_EMAIL = ?"
+        val cursor = db.rawQuery(query, arrayOf(email))
+
+        var userName: String? = null
+        if (cursor.moveToFirst()) {
+            userName = cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME))
+        }
+
+        cursor.close()
+        return userName
+    }
     fun getQuestionSetNames(): List<String> {
         val questionSets = mutableListOf<String>()
         val db = readableDatabase

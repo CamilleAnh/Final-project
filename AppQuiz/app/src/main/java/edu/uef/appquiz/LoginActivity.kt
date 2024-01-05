@@ -78,6 +78,8 @@ class LoginActivity : AppCompatActivity() {
                 }
                 "user" -> {
                     val intent = Intent(this, MainActivity::class.java)
+                    intent.putExtra("USER_EMAIL", email)
+                    println(email)
                     startActivity(intent)
                 }
                 else -> {

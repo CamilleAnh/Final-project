@@ -15,7 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuizzMaster"
         tools:targetApi="31">
-
+        <activity
+            android:name=".EditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".ChangePassword"
+            android:exported="false" />
         <activity
             android:name=".ResultActivity"
             android:exported="false" />
@@ -31,7 +36,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".AddQuestionActivity"
@@ -42,14 +46,10 @@
         </activity>
         <activity
             android:name=".QuizQuestionsActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".DetailQuestionSetActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".AddQuestions"
             android:parentActivityName=".MainActivity">
@@ -71,12 +71,9 @@
             <!-- Other activity configurations -->
 
         </activity>
-
         <activity
             android:name=".AdminActivity"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".ForgotPasswordActivity"
             android:exported="true" />

@@ -16,14 +16,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var questionListView: ListView
     private var questionSetId: Long = 0  // Chuyển đổi kiểu dữ liệu từ String sang Long
     private lateinit var dbHelper: DatabaseHelper
-
+    private lateinit var Email: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         dbHelper = DatabaseHelper(this)
         questionListView = findViewById(R.id.questionListView)
-
+        Email = intent.getStringExtra("USER_EMAIL").toString()
         // Get the list of question sets from SQLite
         val questionSets = dbHelper.getQuestionSetNames()
 
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         val icon1: ImageView = findViewById(R.id.menu_icon1)
         val icon2: ImageView = findViewById(R.id.menu_icon2)
-        val icon3: ImageView = findViewById(R.id.menu_icon3)
+
 
         icon1.setOnClickListener {
             showToast("Icon 1 clicked")
@@ -46,15 +46,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         icon2.setOnClickListener {
-            showToast("Icon 2 clicked")
+
             val intent = Intent(this, Profile::class.java)
+            // Nhận thông tin người dùng từ Intent
+
+
+
+            intent.putExtra("USER_EMAIL", Email)
+
+            println(Email)
             startActivity(intent)
         }
 
-        icon3.setOnClickListener {
-            showToast("Icon 3 clicked")
-            // Add your logic for Icon 3 click here
-        }
+
     }
 
     private fun showToast(message: String) {

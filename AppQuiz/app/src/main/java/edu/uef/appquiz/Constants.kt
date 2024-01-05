@@ -1,11 +1,32 @@
 package edu.uef.appquiz
 
 data class User(
-    val username: String,
+    var username: String,
     val email: String,
     val role: String,
-    val Password: String
-)
+    var Password: String
+) {
+
+}
+
+// Ví dụ đơn giản của một lớp SessionManager
+class SessionManager {
+    companion object {
+        private var user: User? = null
+
+        fun updateUser(updatedUser: User) {
+            user = updatedUser
+        }
+
+        fun getCurrentUser(): User? {
+            return user
+        }
+
+        fun clearSession() {
+            user = null
+        }
+    }
+}
 
 const val TOTAL_QUESTIONS: String = "total_questions"
 const val CORRECT_ANSWERS: String = "correct_answers"
@@ -16,8 +37,8 @@ data class Question(
     val correctAnswer: Int
 ) {
 
-}
 
+}
 data class QuestionSet(
     val questionSetId: Long,
     val questionSetName: String?,
@@ -30,4 +51,3 @@ data class QuestionDetails(
     var option4: String,
     var correctAnswer: String
 )
-
