@@ -16,8 +16,25 @@
         android:theme="@style/Theme.QuizzMaster"
         tools:targetApi="31">
         <activity
+            android:name=".EditAccountActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".DetailAccountActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".Admin_List_Account"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".Admin_List_QuestionSet"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".EditProfile"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".ChangePassword"
             android:exported="false" />
@@ -49,6 +66,7 @@
             android:exported="true" />
         <activity
             android:name=".DetailQuestionSetActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="true" />
         <activity
             android:name=".AddQuestions"
@@ -76,6 +94,7 @@
             android:exported="true" />
         <activity
             android:name=".ForgotPasswordActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="true" />
         <activity
             android:name=".RegisterActivity"

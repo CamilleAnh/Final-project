@@ -1,58 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminActivity">
+    android:background="@color/contentBodyColor">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="3dp">
 
-        <ListView
-            android:id="@+id/questionList"
+        <TextView
+            style="@style/viewParent.headerText"
+            android:text="Admin View" />
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@android:color/darker_gray"
-            android:dividerHeight="0.5dp"
-            android:padding="16dp"
-            android:layout_above="@id/buttonLayout"/>
+            android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/buttonLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileCircleImageView"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/profile"
+                app:civ_border_color="@color/imageBorderColor"
+                app:civ_border_width="2dp" />
 
-
-            <LinearLayout
-                android:id="@+id/detailButtonsLayout"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
-
-
+            <TextView
+                android:id="@+id/usernameTextView"
+                style="@style/viewParent.headerText"
+                android:text="Admin"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/profileCircleImageView"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"/>
 
 
-                <Button
-                    android:id="@+id/deleteQuestionButton"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Delete Question Set"
-                    android:visibility="gone" />
 
-                <Button
-                    android:id="@+id/detailButton"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Detail Question Set"
-                    android:visibility="gone" />
-            </LinearLayout>
-        </LinearLayout>
-    </RelativeLayout>
-</RelativeLayout>
+        </RelativeLayout>
+
+        <TextView
+            style="@style/viewParent.headerText.settingsMiniTitle"
+            android:text="Function"/>
+
+        <TextView
+            android:id="@+id/ListQuestion"
+            style="@style/viewParent.headerText.settingsTextIcon"
+
+            android:layout_height="54dp"
+            android:drawableLeft="@drawable/clipboard"
+            android:text="List Question Set"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/ListAccount"
+            style="@style/viewParent.headerText.settingsTextIcon"
+            android:layout_height="47dp"
+            android:drawableLeft="@drawable/accountable"
+            android:text="List Account"
+
+            android:textSize="20dp" />
+
+
+
+        <TextView
+            android:id="@+id/logoutTextView"
+            style="@style/viewParent.headerText.settingsTextIcon"
+            android:drawableLeft="@drawable/ic_logout"
+
+            android:layout_marginTop="350dp"
+            android:text="Logout" />
+
+        <TextView
+            style="@style/viewParent.headerText.settingsMiniTitle"
+            android:text="App quizz ver test :3"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+</ScrollView>

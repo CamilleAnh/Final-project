@@ -174,6 +174,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
             R.id.btnSubmit -> {
                 if (mSelectedOptionPosition == 0) {
+
                     mCurrentPosition++
 
                     when {
@@ -183,7 +184,6 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
                         else -> {
                             val intent = Intent(this, ResultActivity::class.java)
-                            // intent.putExtra(Constants.USER_NAME, mUserName)
                              intent.putExtra(CORRECT_ANSWERS, mCorrectAnswers)
                              intent.putExtra(TOTAL_QUESTIONS, mQuestionsList?.size)
                              startActivity(intent)
@@ -191,6 +191,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                         }
                     }
                 } else {
+                    handleSelectedAnswer()
                     val question1 = mQuestionsList?.get(mCurrentPosition - 1)
                     if (question1!!.correctAnswer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
@@ -240,5 +241,13 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                 )
             }
         }
+    }
+    private fun handleSelectedAnswer() {
+        val question = mQuestionsList!![mCurrentPosition - 1]
+        if (question.correctAnswer == mSelectedOptionPosition) {
+            mCorrectAnswers++
+        }
+
+        // Rest of the logic...
     }
 }

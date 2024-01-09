@@ -53,10 +53,7 @@ class Profile : AppCompatActivity() {
         setDarkModeSwitch()
     }
     private fun logout() {
-        // Add your logout logic here
-        // For example, you can clear user session, navigate to the login screen, etc.
 
-        // In this example, I'm assuming LoginActivity is your login screen
         val intent = Intent(this, LoginActivity::class.java)
         // Clear the back stack, so the user can't navigate back to the profile screen
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

@@ -345,6 +345,37 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return questions
     }
 
+    fun deleteUser(email: String): Boolean {
+        val db = this.writableDatabase
+
+        val whereClause = "$COLUMN_EMAIL = ?"
+        val whereArgs = arrayOf(email)
+        val result = db.delete(TABLE_NAME_USERS, whereClause, whereArgs)
+
+        db.close()
+
+        return result != -1
+    }
+
+    fun getAllUsers(): List<User> {
+        val users = mutableListOf<User>()
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_NAME_USERS"
+        val cursor: Cursor = db.rawQuery(query, null)
+
+        while (cursor.moveToNext()) {
+            val user = User(
+                username = cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME)),
+                email = cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL)),
+                role = cursor.getString(cursor.getColumnIndex(COLUMN_ROLE)),
+                Password = cursor.getString(cursor.getColumnIndex(COLUMN_PASSWORD))
+            )
+            users.add(user)
+        }
+
+        cursor.close()
+        return users
+    }
     fun updateUser(user: User) {
         val db = this.writableDatabase
         val values = ContentValues()
@@ -471,6 +502,25 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.insert(TABLE_NAME_QUESTIONS, null, values)
         Log.d("YourTag", "Question added to database")
         db.close()
+    }
+    fun updateUser(email: String, editedUser: User): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        values.put(COLUMN_USERNAME, editedUser.username)
+        values.put(COLUMN_EMAIL, editedUser.email)
+        values.put(COLUMN_ROLE, editedUser.role)
+        values.put(COLUMN_PASSWORD, editedUser.Password)
+
+        val whereClause = "$COLUMN_EMAIL = ?"
+        val whereArgs = arrayOf(email)
+
+        // Thực hiện cập nhật thông tin người dùng dựa trên email
+        val result = db.update(TABLE_NAME_USERS, values, whereClause, whereArgs)
+
+        db.close()
+
+        return result != -1
     }
 
     fun getUserByEmail(email: String): User? {

@@ -1,9 +1,9 @@
 <!-- activity_detail_question_set.xml -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".DetailQuestionSetActivity">
@@ -37,5 +37,6 @@
         android:layout_height="wrap_content"
         android:text="Edit Questions"
         android:layout_gravity="center"
+        app:cardCornerRadius="60dp"
         android:layout_marginTop="16dp"/>
 </LinearLayout>

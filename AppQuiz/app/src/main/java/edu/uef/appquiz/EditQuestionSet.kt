@@ -3,9 +3,13 @@ package edu.uef.appquiz
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class EditQuestionSet : AppCompatActivity() {
@@ -91,16 +95,26 @@ class EditQuestionSet : AppCompatActivity() {
             etOption4ToEdit.text.toString(),
             etCorrectAnswerToEdit.text.toString()
         )
+        if (isValidAnswer(editedQuestionDetails.correctAnswer)) {
+            // Lấy questionSetId và currentQuestionPosition từ Intent hoặc nơi khác
+            val questionSetId = intent.getLongExtra("questionSetId", -1)
 
-        // Lấy questionSetId và currentQuestionPosition từ Intent hoặc nơi khác
-        val questionSetId = intent.getLongExtra("questionSetId", -1)
+            // Gọi hàm cập nhật trong DatabaseHelper
+            val databaseHelper = DatabaseHelper(this)
+            val questionId = databaseHelper.retrieveQuestionId(questionSetId, currentQuestionPosition)
 
-        // Gọi hàm cập nhật trong DatabaseHelper
-        val databaseHelper = DatabaseHelper(this)
-        val questionId = databaseHelper.retrieveQuestionId(questionSetId, currentQuestionPosition)
+            databaseHelper.updateQuestionDetails(questionSetId, questionId, editedQuestionDetails)
 
-        databaseHelper.updateQuestionDetails(questionSetId, questionId, editedQuestionDetails)
+            // Hiển thị thông báo hoặc thực hiện hành động khác sau khi lưu thành công
+        } else {
+            // Nếu câu trả lời không hợp lệ, bạn có thể hiển thị thông báo hoặc thực hiện xử lý khác
+             Toast.makeText(this, "Câu trả lời phải là một số từ 1 đến 4", Toast.LENGTH_SHORT).show()
+        }
 
-        // Hiển thị thông báo hoặc thực hiện hành động khác sau khi lưu thành công
     }
+    private fun isValidAnswer(answer: String): Boolean {
+        val answerValue = answer.toIntOrNull()
+        return answerValue != null && answerValue in 1..4
+    }
+
 }
