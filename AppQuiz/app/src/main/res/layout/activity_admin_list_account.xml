@@ -42,7 +42,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Delete Question Set"
+                    android:text="Delete Account"
                     android:visibility="gone" />
 
                 <Button
@@ -50,7 +50,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Detail Question Set"
+                    android:text="Detail Account"
                     android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
